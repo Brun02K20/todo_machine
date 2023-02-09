@@ -3,12 +3,12 @@
 import React from "react";
 
 // importo los estilos
-import "./styles/TodoCounter.css";
+import "./TodoCounter.css";
 
 // dentro de la funcion retorno el codigo que yo necesito renderizar
-function TodoCounter (){
+function TodoCounter ({ total, completed }){
     return (
-        <h2 className="todoCounter">Completaste 2 de 3 TODOs</h2>
+        <h2 className="todoCounter">Completaste {completed} de {total} TODOs</h2>
     );
 };
 

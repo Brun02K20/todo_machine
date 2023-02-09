@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './components/App/App.js';
 import reportWebVitals from './reportWebVitals';  // en otro curso vamos a entender para que sirve esto
 
 // EN REACT EXISTEN MUCHAS FORMAS DE CREAR COMPONENTES, UNA DE ELLAS ES MEDIANTE LAS CLASES QUE EXTIENDEN DE LA CLASE React.Component --> class Componente extends React.Component , pero lo cierto es que ya nadie usa esta forma. Loque se hace son funciones componentes, las cuales, su nombre empieza por mayuscula y en el return se devuelve el React.createElement

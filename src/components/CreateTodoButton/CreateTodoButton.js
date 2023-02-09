@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/CreateTodoButton.css";
+import "./CreateTodoButton.css";
 
 
 // formas de crear un evento dentro de un componente: 
