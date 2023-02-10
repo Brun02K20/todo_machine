@@ -35,32 +35,76 @@ import { waitForElementToBeRemoved } from '@testing-library/react';
 // SINTAXIS DE UN ESTADO:
 // const [nombreEstado, nombreFuncionActualizadoraEstado] = React.useState(valorPorDefectoDelEstado);
 
-function App() {
-  
-  // llamar a local storage:
-  const localStorageTodos = localStorage.getItem("TODOS_V1");
 
-  // aca hay 2 casos: que el usuario no tenga o si tenga todos guardados
-  let parsedTodos;
-
-  // verificamos si no hay nada en localStorage:
-  if(!localStorageTodos){
-    localStorage.setItem("TODOS_V1", JSON.stringify([]));
-    parsedTodos = [];
-  }else{parsedTodos = JSON.parse(localStorageTodos)};
-
+// Creando un custom Hook
+function useLocalStorage(itemName, initialValue){
+  // vamos a simular el llamado a una API, para ello requeriremos estados de cargando y de error
+  const [loading, setLoading] = React.useState(true); 
+  const [error, setError] = React.useState(false);
 
   // aca creamos los estads que van a ser compartidos entre todos los componentes hijos de este componente App que es el componente padre:
+  const [item, setItem] = React.useState(initialValue);
 
-  const [searchValue, setSearchValue] = React.useState("");
-  const [todos, setTodos] = React.useState(parsedTodos);
+  // llamar a react.useeffect:
+  React.useEffect( () => {
+    setTimeout( () => {
+      try {
+        // aca va a ir todo lo relacionado al local storage
+
+        // llamar a local storage:
+        const localStorageItem = localStorage.getItem(itemName);
+
+        // aca hay 2 casos: que el usuario no tenga o si tenga todos guardados
+        let parsedItem;
+
+        // verificamos si no hay nada en localStorage:
+        if(!localStorageItem){
+          localStorage.setItem(itemName, JSON.stringify(initialValue));
+          parsedItem = initialValue;
+        }else{parsedItem = JSON.parse(localStorageItem)};
+
+        setItem(item, parsedItem);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+      }
+      
+      
+
+    }, 1000)
+  }, []);
+
+
+  
+
+  
+
+  // ahora bien, vemos que si yo hago cambios en la app y recargo la pagina, esos cambios se deshacen, para evitar esto, debo de comunicar mi aplicacion con el local storage, para eso:
+
+  const saveItem = (newItem) => {
+    try {
+      const stringyfiedItem = JSON.stringify(newItem);
+      localStorage.setItem(itemName, stringyfiedItem);
+      setItem(newItem);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  return {item, saveItem, loading, error};
+};
+
+function App() {
+
+  const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage("TODOS_V1", []);
 
   // el .filter te crea un nuevo array compuesto por los elementos del array anterior que cumplen con la condicion puesta en el filtro
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
 
   // Bien, la idea ahora es que el buscador funcione como un filtrador de TODOs, como hariamos eso?
-  
+  const [searchValue, setSearchValue] = React.useState("");
+
   // DUDA... PORQUE SE USA LET Y NO CONST EN ESTE CASO SI SE TRATA DE UN ARRAY? ADEMAS DE QUE LA CONSTANTE ESTA EN UN ALCANCE DE BLOCKSCOPE COMO POR ASI DECIR SUPERIOR AL IF
   let searchedTodos = [];
 
@@ -81,14 +125,7 @@ function App() {
     });
   };
 
-  // ahora bien, vemos que si yo hago cambios en la app y recargo la pagina, esos cambios se deshacen, para evitar esto, debo de comunicar mi aplicacion con el local storage, para eso:
-
-  const saveTodos = (newTodos) => {
-    const stringyfiedTodos = JSON.stringify(newTodos);
-    localStorage.setItem("TODOS_V1", stringyfiedTodos);
-    setTodos(newTodos);
-
-  };
+  
 
 
 
@@ -114,18 +151,22 @@ function App() {
     saveTodos(newTodos);
   };
 
+
   return (
     <AppUI 
-    totalTodos={totalTodos}  // asi es como envio propiedades a los componentes hijos
-    completedTodos={completedTodos}
-    
-    searchValue={searchValue}
-    setSearchValue={setSearchValue}
-    
-    searchedTodos={searchedTodos}
 
-    toggleCompleteTodo={toggleCompleteTodo}
-    deleteTodo={deleteTodo}
+      loading={loading}
+      error={error}
+      totalTodos={totalTodos}  // asi es como envio propiedades a los componentes hijos
+      completedTodos={completedTodos}
+      
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      
+      searchedTodos={searchedTodos}
+
+      toggleCompleteTodo={toggleCompleteTodo}
+      deleteTodo={deleteTodo}
     
     
     />
