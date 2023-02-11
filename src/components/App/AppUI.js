@@ -5,18 +5,13 @@ import { TodoSearch } from '../TodoSearch/TodoSearch.js';
 import { TodoList } from '../TodoList/TodoList.js';
 import { TodoItem } from '../TodoItem/TodoItem.js';
 import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton.js';
+import { TodoContext } from "../TodoContext/index.js";
 
-function AppUI({
-    loading,
-    error,
-    totalTodos, 
-    completedTodos, 
-    searchValue, 
-    setSearchValue, 
-    searchedTodos, 
-    toggleCompleteTodo, 
-    deleteTodo
-}){
+function AppUI(){
+    // es el mismo value que estariamos recibiendo si llamaramos al consumidor en la funcion en la que estan las render-props, es el que guardamos en el provider
+    // const value = React.useContext(TodoContext);
+    const {error, loading, searchedTodos, toggleCompleteTodo, deleteTodo} = React.useContext(TodoContext);
+
     return(
         // para que funcione la aplicacion primero debo crear esos componentes que declare antes de ver los resultados en mi navegador
         // nota: a la lista de TO-DOs le puse apertura y cierre porque va a haber componentes dentro de ese componente, es decir, la lista es un componente compuesto por componentes
@@ -29,22 +24,15 @@ function AppUI({
 
         // ahora bien, a la hora de crear componentes, se crea un archivo por cada componente a crear, asi que procedemos con eso
         <React.Fragment>
-            < TodoCounter 
-                total={totalTodos}  // asi es como envio propiedades a los componentes hijos
-                completed={completedTodos}
-            /> 
+            < TodoCounter /> 
             
-            < TodoSearch 
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-            /> 
+            < TodoSearch /> 
             
             <TodoList>
                 {error && <p className="error_state">OOPS, AN ERROR HAS OCCURRED</p>}
                 {loading && <p className="loading_state">LOADING, PLEASE WAIT...</p>}
                 {(!loading && !searchedTodos.length) && <p className="loading_state">CREATE YOUR FIRST TODO!!!</p>}
-
-
+                
                 {searchedTodos.map(todo => (
                     < TodoItem 
                         key={todo.text} 
@@ -55,7 +43,7 @@ function AppUI({
                     />))
                 }
             </TodoList>
-            
+
             < CreateTodoButton />
         </React.Fragment>
     );

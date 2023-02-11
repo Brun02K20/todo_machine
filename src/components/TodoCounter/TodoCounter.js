@@ -1,14 +1,16 @@
 // por cada componente debo hacer el import del paquete de react y una funcion con el nombre del componente en cuestion 
 
 import React from "react";
+import { TodoContext } from "../TodoContext";
 
 // importo los estilos
 import "./TodoCounter.css";
 
 // dentro de la funcion retorno el codigo que yo necesito renderizar
-function TodoCounter ({ total, completed }){
+function TodoCounter (){
+    const { totalTodos, completedTodos } = React.useContext(TodoContext);
     return (
-        <h2 className="todoCounter">Completaste {completed} de {total} TODOs</h2>
+        <h2 className="todoCounter">Completaste {completedTodos} de {totalTodos} TODOs</h2>
     );
 };
 
