@@ -40,9 +40,9 @@ function AppUI({
             /> 
             
             <TodoList>
-                {error && <p>OOPS, AN ERROR HAS OCCURRED</p>}
-                {loading && <p>LOADING, PLEASE WAIT</p>}
-                {(!loading && !searchedTodos.length) && <p>CREATE YOUR FIRST TODO!!!</p>}
+                {error && <p className="error_state">OOPS, AN ERROR HAS OCCURRED</p>}
+                {loading && <p className="loading_state">LOADING, PLEASE WAIT...</p>}
+                {(!loading && !searchedTodos.length) && <p className="loading_state">CREATE YOUR FIRST TODO!!!</p>}
 
 
                 {searchedTodos.map(todo => (

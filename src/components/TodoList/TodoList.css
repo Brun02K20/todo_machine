@@ -14,3 +14,18 @@ ul {
         width: 100%;
     }
 }
+
+
+.error_state{
+    font-family: sans-serif;
+    font-weight: 600;
+    text-shadow: 0 0 10px #ff0000;
+    color: white;
+}
+  
+.loading_state{
+    font-family: sans-serif;
+    font-weight: 600;
+    text-shadow: 0 0 10px #0000FF;
+    color:white;
+}

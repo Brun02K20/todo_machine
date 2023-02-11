@@ -11,8 +11,6 @@ import { waitForElementToBeRemoved } from '@testing-library/react';
 
 // La magia de usar componentes son las propiedades (aclaremos una cosita, cuando trabajamos con componentes se llaman propiedades, cuando trabajamos en HTML se llaman atributos, no son lo mismo), en el index.js en el componente app le añadimos una propiedad saludo que es = a Oli, y aca en el compoennte de la App en un parrafo despues del ancla vean que llamo al objeto propiedades y llamo a la propiedad saludo para que por pantalla me muestre el Oli
 
-
-
 // la gran duda es, como añado varios TODOITEM dependiendo de la cantidad de todos creados por los usuarios? ASI:
 // const listaFalsaTodos = [
 //   {
@@ -34,7 +32,6 @@ import { waitForElementToBeRemoved } from '@testing-library/react';
 // ];
 // SINTAXIS DE UN ESTADO:
 // const [nombreEstado, nombreFuncionActualizadoraEstado] = React.useState(valorPorDefectoDelEstado);
-
 
 // Creando un custom Hook
 function useLocalStorage(itemName, initialValue){
@@ -68,16 +65,8 @@ function useLocalStorage(itemName, initialValue){
       } catch (error) {
         setError(error);
       }
-      
-      
-
     }, 1000)
   }, []);
-
-
-  
-
-  
 
   // ahora bien, vemos que si yo hago cambios en la app y recargo la pagina, esos cambios se deshacen, para evitar esto, debo de comunicar mi aplicacion con el local storage, para eso:
 
@@ -90,12 +79,10 @@ function useLocalStorage(itemName, initialValue){
       setError(error);
     }
   };
-
   return {item, saveItem, loading, error};
 };
 
 function App() {
-
   const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage("TODOS_V1", []);
 
   // el .filter te crea un nuevo array compuesto por los elementos del array anterior que cumplen con la condicion puesta en el filtro
@@ -125,10 +112,6 @@ function App() {
     });
   };
 
-  
-
-
-
   // metodo para marcar TODOs como completados 
   const toggleCompleteTodo = (textoDelTodo) => {
     // cambio un todo a completado.
@@ -144,36 +127,26 @@ function App() {
   const deleteTodo = (textoDelTodo) => {
     // cambio un todo a completado.
     const todoIndex = todos.findIndex(todo => todo.text === textoDelTodo);
-
-    
     const newTodos = [...todos];
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
   };
 
-
   return (
     <AppUI 
-
       loading={loading}
       error={error}
       totalTodos={totalTodos}  // asi es como envio propiedades a los componentes hijos
       completedTodos={completedTodos}
-      
       searchValue={searchValue}
       setSearchValue={setSearchValue}
-      
       searchedTodos={searchedTodos}
-
       toggleCompleteTodo={toggleCompleteTodo}
       deleteTodo={deleteTodo}
-    
-    
     />
   );
 }
 
 export default App;
-
 
 // nota, en react cuando hago render de una lista, como es este caso que hago render de la lista de listaFalsaTodos, tenemos que agregar un apropiedad especial llamada "key" a nuestro componentes, para que react pueda identificar cual componente es cual dentro de un alista, evitando asi renders innecesarios, se soluciona facil: 
