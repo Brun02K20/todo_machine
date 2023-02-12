@@ -17,4 +17,3 @@ function Modal( {children} ){
 };
 
 export { Modal }
-

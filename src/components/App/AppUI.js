@@ -9,6 +9,11 @@ import { TodoContext } from "../TodoContext/index.js";
 import { Modal } from "../Modal/modal.js";
 import { TodoForm } from "../TodoForm/todoForm.js";
 
+// imports del loading skeleton
+import { TodosError } from "../LoadingSkeleton/TodosError/todosError.js";
+import { TodosLoading } from "../LoadingSkeleton/TodosLoading/todosLoading.js";
+import { EmptyTodos } from "../LoadingSkeleton/EmptyTodos/emptyTodos.js";
+
 // en linea 48 pregunto si openModal es true, si es asi, que renderice lo que esta dento de los ()
 
 function AppUI(){
@@ -33,9 +38,9 @@ function AppUI(){
             < TodoSearch /> 
             
             <TodoList>
-                {error && <p className="error_state">OOPS, AN ERROR HAS OCCURRED</p>}
-                {loading && <p className="loading_state">LOADING, PLEASE WAIT...</p>}
-                {(!loading && !searchedTodos.length) && <p className="loading_state">CREATE YOUR TO-DOS!!!</p>}
+                {error && < TodosError error={error}/>}
+                {loading && < TodosLoading />}
+                {(!loading && !searchedTodos.length) && < EmptyTodos />}
                 
                 {searchedTodos.map(todo => (
                     < TodoItem 
