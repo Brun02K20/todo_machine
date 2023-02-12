@@ -6,11 +6,15 @@ import { TodoList } from '../TodoList/TodoList.js';
 import { TodoItem } from '../TodoItem/TodoItem.js';
 import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton.js';
 import { TodoContext } from "../TodoContext/index.js";
+import { Modal } from "../Modal/modal.js";
+import { TodoForm } from "../TodoForm/todoForm.js";
+
+// en linea 48 pregunto si openModal es true, si es asi, que renderice lo que esta dento de los ()
 
 function AppUI(){
     // es el mismo value que estariamos recibiendo si llamaramos al consumidor en la funcion en la que estan las render-props, es el que guardamos en el provider
     // const value = React.useContext(TodoContext);
-    const {error, loading, searchedTodos, toggleCompleteTodo, deleteTodo} = React.useContext(TodoContext);
+    const {error, loading, searchedTodos, toggleCompleteTodo, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
 
     return(
         // para que funcione la aplicacion primero debo crear esos componentes que declare antes de ver los resultados en mi navegador
@@ -31,7 +35,7 @@ function AppUI(){
             <TodoList>
                 {error && <p className="error_state">OOPS, AN ERROR HAS OCCURRED</p>}
                 {loading && <p className="loading_state">LOADING, PLEASE WAIT...</p>}
-                {(!loading && !searchedTodos.length) && <p className="loading_state">CREATE YOUR FIRST TODO!!!</p>}
+                {(!loading && !searchedTodos.length) && <p className="loading_state">CREATE YOUR TO-DOS!!!</p>}
                 
                 {searchedTodos.map(todo => (
                     < TodoItem 
@@ -44,7 +48,15 @@ function AppUI(){
                 }
             </TodoList>
 
-            < CreateTodoButton />
+            {!!openModal && (
+                <Modal>
+                    <TodoForm />
+                </Modal>
+            )}    
+
+            < CreateTodoButton 
+                setOpenModal={setOpenModal}
+            />
         </React.Fragment>
     );
 };

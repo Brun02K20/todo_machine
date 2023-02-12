@@ -30,7 +30,7 @@ function TodoSearch(){
             <input 
                 onChange={onSearchValueChange} 
                 className="todoSearch" 
-                placeholder='Buscar TODOs...' 
+                placeholder='Search TO-DOs...' 
                 value={searchValue}
             />
         </form>

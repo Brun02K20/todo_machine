@@ -9,12 +9,12 @@ import "./CreateTodoButton.css";
     // en el return quedaria asi:
     // <button className="createTodoButton" onClick= () => onClickButton()}>+</button>
 
-function CreateTodoButton(){
-    const onClickButton = (msg) =>{
-        alert(msg);
+function CreateTodoButton(props){
+    const onClickButton = () =>{
+        props.setOpenModal(prevState => !prevState);
     };
     return (
-        <button className="createTodoButton" onClick={() =>onClickButton("Aqui se abre el modal")}>+</button>
+        <button className="createTodoButton" onClick={onClickButton}>+</button>
     );
 };
 
