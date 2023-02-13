@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/CursoIntroduccionReactPlatzi/static/css/main.a6840620.css",
+    "main.js": "/CursoIntroduccionReactPlatzi/static/js/main.1a3bf1f3.js",
+    "index.html": "/CursoIntroduccionReactPlatzi/index.html",
+    "main.a6840620.css.map": "/CursoIntroduccionReactPlatzi/static/css/main.a6840620.css.map",
+    "main.1a3bf1f3.js.map": "/CursoIntroduccionReactPlatzi/static/js/main.1a3bf1f3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a6840620.css",
+    "static/js/main.1a3bf1f3.js"
+  ]
+}
