@@ -1,12 +1,9 @@
 import React from "react";
-import { TodoContext } from "../TodoContext";
 import "./todoForm.css"
 
-function TodoForm(){
+function TodoForm({addTodo, setOpenModal}){
     // crear un estado LOCAL (o sea, solamente propio de este componente), este estado escuchara los cambios que hagan los usuarios en el textarea y almacenara esa modificacion en una variable de estado
     const [newTodoText, setNewTodoText] = React.useState("");
-
-    const {addTodo, setOpenModal} = React.useContext(TodoContext);
 
     const onChange = (evento) => {
         setNewTodoText(evento.target.value);
