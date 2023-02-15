@@ -8,6 +8,7 @@ import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton.js';
 import { TodoContext } from "../TodoContext/index.js";
 import { Modal } from "../Modal/modal.js";
 import { TodoForm } from "../TodoForm/todoForm.js";
+import { TodoHeader } from "../TodoHeader/TodoHeader.js";
 
 // imports del loading skeleton
 import { TodosError } from "../LoadingSkeleton/TodosError/todosError.js";
@@ -19,7 +20,19 @@ import { EmptyTodos } from "../LoadingSkeleton/EmptyTodos/emptyTodos.js";
 function AppUI(){
     // es el mismo value que estariamos recibiendo si llamaramos al consumidor en la funcion en la que estan las render-props, es el que guardamos en el provider
     // const value = React.useContext(TodoContext);
-    const {error, loading, searchedTodos, toggleCompleteTodo, deleteTodo, openModal, setOpenModal} = React.useContext(TodoContext);
+    const {
+        error, 
+        loading, 
+        searchedTodos, 
+        toggleCompleteTodo, 
+        deleteTodo, 
+        openModal, 
+        setOpenModal,
+        totalTodos, 
+        completedTodos,
+        searchValue, 
+        setSearchValue
+    } = React.useContext(TodoContext);
 
     return(
         // para que funcione la aplicacion primero debo crear esos componentes que declare antes de ver los resultados en mi navegador
@@ -33,9 +46,11 @@ function AppUI(){
 
         // ahora bien, a la hora de crear componentes, se crea un archivo por cada componente a crear, asi que procedemos con eso
         <React.Fragment>
-            < TodoCounter /> 
-            
-            < TodoSearch /> 
+
+            <TodoHeader>
+                < TodoCounter totalTodos={totalTodos} completedTodos={completedTodos}/> 
+                < TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+            </TodoHeader>
             
             <TodoList>
                 {error && < TodosError error={error}/>}
