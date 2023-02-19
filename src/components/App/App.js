@@ -14,6 +14,7 @@ import { CreateTodoButton } from '../CreateTodoButton/CreateTodoButton.js';
 import { Modal } from "../Modal/modal.js";
 import { TodoForm } from "../TodoForm/todoForm.js";
 import { TodoHeader } from "../TodoHeader/TodoHeader.js";
+import { SearchResult } from '../SearchResult/SearchResult.js';
 
 // imports del loading skeleton
 import { TodosError } from "../LoadingSkeleton/TodosError/todosError.js";
@@ -85,10 +86,23 @@ function App() {
         error={error}
         loading={loading}
         searchedTodos={searchedTodos}
+        totalTodos={totalTodos}
+        searchText={searchValue}
         onError={() => <TodosError />}
         onLoading={() => <TodosLoading />}
         onEmptyTodos={() => <EmptyTodos />}
-        render={todo => (
+        onEmptySearchResults={()=> <SearchResult searchText={searchValue}/>}
+        // render={todo => (
+        //   <TodoItem
+        //     key={todo.text}
+        //     text={todo.text}
+        //     completed={todo.completed}
+        //     onComplete={() => toggleCompleteTodo(todo.text)}
+        //     onDelete={() => deleteTodo(todo.text)}
+        //   />
+        // )}
+      >
+        {todo => (
           <TodoItem
             key={todo.text}
             text={todo.text}
@@ -97,7 +111,7 @@ function App() {
             onDelete={() => deleteTodo(todo.text)}
           />
         )}
-      />
+      </TodoList>
       
       {/* <TodoList>
         {error && < TodosError error={error}/>}
