@@ -10,7 +10,7 @@ import ReactDOM from "react-dom/client";
 
 // function App () {
 //   return (
-//     React.createElement("h1", {id: "title"}, "SEXO ANAL")
+//     React.createElement("h1", {id: "title"}, "Titulo")
 //   );
 // }
 
@@ -19,16 +19,43 @@ import ReactDOM from "react-dom/client";
 // function App () {
 //   return (
 //     <h1 id="title">
-//       SEXO ANAL
+//       Titulo
 //     </h1>
 //   );
 // }
 
-// con esto lo que hacemos ahora es renderizar un componente creado por nosotros guardado en el archivo App.js (linea 30)
+
+// // jugando a crear mi primer HOC; los HOCS por convencion empiezan con with.
+// function Appp(props){
+//     return (
+//         <h1>!{props.saludo} {props.nombre}!</h1>
+//     );
+// }
+
+// // la funcion que se retorna debe ser si o si un componente de react, el resto puede ser HOC o lo que quiera
+// function withSaludo(WrappedComponent) {
+//     return function WrappedComponentWithSaludo(saludo){
+//         return function ComponenteDeVerdad(props){
+//             return (
+//                 <React.Fragment>
+//                     < WrappedComponent {...props} saludo={saludo}/>
+//                     <p>MONTIEL AL ARCO, LO MANDO AL LADO DEL WRAPPED COMPONENT</p>
+//                 </React.Fragment>
+//             );
+//         }
+//     }
+// }
+
+// // aca guardamos al componente luego de ser envuelto con el HOC
+// const AppWithSaludo = withSaludo(Appp)("buenos dias");
+
+
+// con esto lo que hacemos ahora es renderizar un componente creado por nosotros guardado en el archivo App.js (linea 55)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />
+    //< AppWithSaludo nombre="Bruno"/>
+    <App/>
 );
 
 // If you want to start measuring performance in your app, pass a function
@@ -37,4 +64,6 @@ root.render(
 // reportWebVitals();
 
 
-// en otro curso vamos a entender para que sirve esto (lineas 38 a 44), lo mismo con los <React.StrictMode>
+// en otro curso vamos a entender para que sirve esto (lineas 61 a 64), lo mismo con los <React.StrictMode>
+
+
