@@ -6,3 +6,7 @@
     font-family: sans-serif;
     color: white;
 }
+
+.todoCounter--loading{
+    opacity: 50%;
+}

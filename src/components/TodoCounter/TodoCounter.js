@@ -6,9 +6,13 @@ import React from "react";
 import "./TodoCounter.css";
 
 // dentro de la funcion retorno el codigo que yo necesito renderizar
-function TodoCounter ({totalTodos, completedTodos}){
+function TodoCounter ({totalTodos, completedTodos, loading}){
     return (
-        <h2 className="todoCounter">You have completed  {completedTodos} of {totalTodos} TO-DOs</h2>
+        <h2 
+            className={`todoCounter ${!!loading && "todoCounter--loading"}`}
+        >
+            You have completed  {completedTodos} of {totalTodos} TO-DOs
+        </h2>
     );
 };
 

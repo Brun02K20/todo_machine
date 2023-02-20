@@ -77,9 +77,17 @@ function App() {
     // ahora bien, a la hora de crear componentes, se crea un archivo por cada componente a crear, asi que procedemos con eso
     <React.Fragment>
 
-      <TodoHeader>
-        < TodoCounter totalTodos={totalTodos} completedTodos={completedTodos}/> 
-        < TodoSearch searchValue={searchValue} setSearchValue={setSearchValue}/>
+      <TodoHeader loading={loading}>
+        < TodoCounter 
+          totalTodos={totalTodos} 
+          completedTodos={completedTodos} 
+          //loading={loading}
+        /> 
+        < TodoSearch 
+          searchValue={searchValue} 
+          setSearchValue={setSearchValue} 
+          //loading={loading}
+        />
       </TodoHeader>
 
       <TodoList

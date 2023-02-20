@@ -22,8 +22,12 @@ form{
     font-weight: bold;
 }
 
-.TodoSearch:focus {
+.todoSearch:focus {
     outline-color: #e100ff;
+}
+
+.todoSearch:disabled{
+    opacity: 50%;
 }
 
 @media(max-width: 760px){

@@ -15,7 +15,7 @@ import "./TodoSearch.css";
 // aca tamos diciendo que el estado se llama searchValue y va a tener un valor de cadena vacia, esto porque lo que quiero hacer es conectar este estado al input de busqueda, y que el valor del input sea igual al estado que creamos, es decir, a searchValue, y cada vez que se actualice cuando se ejecute el onChange llamaremos a la funcion setSearchValue para actualizar el estado y esa actualizacion sera el valor que hayan escrito los usuarios 
 // const [ searchValue, setSearchValue ] = React.useState("");
 
-function TodoSearch({searchValue, setSearchValue}){  
+function TodoSearch({searchValue, setSearchValue, loading}){  
     const onSearchValueChange = (evento) =>{
         console.log(evento.target.value);
         // aca es donde se actualiza el estado cada vez que el usuario escribe algo
@@ -29,6 +29,7 @@ function TodoSearch({searchValue, setSearchValue}){
                 className="todoSearch" 
                 placeholder='Search TO-DOs...' 
                 value={searchValue}
+                disabled={!!loading}
             />
         </form>
     );
