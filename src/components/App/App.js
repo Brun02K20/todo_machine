@@ -15,7 +15,7 @@ import { Modal } from "../Modal/modal.js";
 import { TodoForm } from "../TodoForm/todoForm.js";
 import { TodoHeader } from "../TodoHeader/TodoHeader.js";
 import { SearchResult } from '../SearchResult/SearchResult.js';
-import { ChangeAlertWithStorageListener } from '../ChangeAlert/ChangeAlert.js';
+import { ChangeAlert } from '../ChangeAlert/ChangeAlert.js';
 
 // imports del loading skeleton
 import { TodosError } from "../LoadingSkeleton/TodosError/todosError.js";
@@ -149,7 +149,7 @@ function App() {
         setOpenModal={setOpenModal}
       />
 
-      <ChangeAlertWithStorageListener synchronize={synchronizedTodos} />
+      <ChangeAlert synchronize={synchronizedTodos} />
     </React.Fragment>
   );
 }
