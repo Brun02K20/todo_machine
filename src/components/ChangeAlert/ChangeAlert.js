@@ -1,16 +1,21 @@
 import React from "react";
 import { withStorageListener } from "./withStorageListener";
+import "./ChangeAlert.css"
 
 function ChangeAlert({show,toggleShow}){
     if(show){
         return (
-            <div>
-                <p>Hubo cambios</p>
-                <button
-                    onClick={()=>toggleShow(false)}
-                >
-                    Recargar Informacion
-                </button>
+            <div className="ChangeAlert-bg">
+                <div className="ChangeAlert-container">
+                    <p className="update-info">Parece que cambiaste tus TO-DOs en otra pestaña de tu navegador</p>
+                    <p className="update-info">Quieres sincronizar la informacion actualizada?</p>
+                    
+                    <button
+                        onClick={()=>toggleShow(false)}
+                    >
+                        YES
+                    </button>
+                </div>
             </div>
         );
     }else{
