@@ -5,7 +5,13 @@ import { useLocalStorage } from "./useLocalStorage";
 // React.createContext nos devuelve un objeto de dos componentes, Provider, y Consumer. El provider se usa para envolver toda la aplicacion (en el App.js). el consumer se usa en todas partes siempre que necesitemos info de ese estado compartido en cualquiera de nuestros componentes
 
 function useTodos(){
-    const {item: todos, saveItem: saveTodos, loading, error} = useLocalStorage("TODOS_V1", []);
+    const {
+        item: todos, 
+        saveItem: saveTodos, 
+        loading, 
+        error, 
+        synchronizeItem: synchronizedTodos
+    } = useLocalStorage("TODOS_V1", []);
 
     // el .filter te crea un nuevo array compuesto por los elementos del array anterior que cumplen con la condicion puesta en el filtro
     const completedTodos = todos.filter(todo => todo.completed).length;
@@ -83,7 +89,8 @@ function useTodos(){
         deleteTodo,
         openModal,
         setOpenModal,
-        addTodo
+        addTodo,
+        synchronizedTodos
     };
 };
 

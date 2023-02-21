@@ -7,6 +7,9 @@ function useLocalStorage(itemName, initialValue){
     const [error, setError] = React.useState(false);
     // aca creamos los estads que van a ser compartidos entre todos los componentes hijos de este componente App que es el componente padre:
     const [item, setItem] = React.useState(initialValue);
+
+    const [synchronizedItem, setSynchronizedItem ] = React.useState(true);
+
     // llamar a react.useeffect:
     React.useEffect( () => {
         setTimeout( () => {
@@ -23,11 +26,12 @@ function useLocalStorage(itemName, initialValue){
                 }else{parsedItem = JSON.parse(localStorageItem)};
                 setItem(parsedItem);
                 setLoading(false);
+                setSynchronizedItem(true);
             } catch (error) {
                 setError(error);
             }
         }, 1000)
-    }, []);
+    }, [synchronizedItem]);
     // ahora bien, vemos que si yo hago cambios en la app y recargo la pagina, esos cambios se deshacen, para evitar esto, debo de comunicar mi aplicacion con el local storage, para eso:
     const saveItem = (newItem) => {
         try {
@@ -38,8 +42,14 @@ function useLocalStorage(itemName, initialValue){
             setError(error);
         }
     };
+
+    // cuando haya un cambio de storage que pueda volver al estado de carga y tbn que se "dispare" el hecho de que hay que sincronizar la informacion de las 2 o mas pestañas en las que el usuario tiene abierta la app
+    const synchronizeItem = () => {
+        setLoading(true);
+        setSynchronizedItem(false);
+    };
     
-    return {item, saveItem, loading, error};
+    return {item, saveItem, loading, error, synchronizeItem};
 };
 
 export { useLocalStorage }

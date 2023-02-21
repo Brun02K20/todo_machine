@@ -15,6 +15,7 @@ import { Modal } from "../Modal/modal.js";
 import { TodoForm } from "../TodoForm/todoForm.js";
 import { TodoHeader } from "../TodoHeader/TodoHeader.js";
 import { SearchResult } from '../SearchResult/SearchResult.js';
+import { ChangeAlertWithStorageListener } from '../ChangeAlert/ChangeAlert.js';
 
 // imports del loading skeleton
 import { TodosError } from "../LoadingSkeleton/TodosError/todosError.js";
@@ -62,7 +63,8 @@ function App() {
     completedTodos,
     searchValue, 
     setSearchValue,
-    addTodo
+    addTodo,
+    synchronizedTodos
   } = useTodos();
   return(
     // para que funcione la aplicacion primero debo crear esos componentes que declare antes de ver los resultados en mi navegador
@@ -146,6 +148,8 @@ function App() {
       < CreateTodoButton 
         setOpenModal={setOpenModal}
       />
+
+      <ChangeAlertWithStorageListener synchronize={synchronizedTodos} />
     </React.Fragment>
   );
 }
