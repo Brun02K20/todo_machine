@@ -1,55 +1,102 @@
 import React from "react";
 
-// Creando un custom Hook
-function useLocalStorage(itemName, initialValue){
-    // vamos a simular el llamado a una API, para ello requeriremos estados de cargando y de error
-    const [loading, setLoading] = React.useState(true); 
-    const [error, setError] = React.useState(false);
-    // aca creamos los estads que van a ser compartidos entre todos los componentes hijos de este componente App que es el componente padre:
-    const [item, setItem] = React.useState(initialValue);
+function useLocalStorage(itemName, initialValue) {
+    const [state, dispatch] = React.useReducer(reducer, initialState({ initialValue }))
 
-    const [synchronizedItem, setSynchronizedItem ] = React.useState(true);
+    const {
+        synchronizedItem,
+        loading,
+        error,
+        item,
+    } = state;
 
-    // llamar a react.useeffect:
-    React.useEffect( () => {
-        setTimeout( () => {
-            try {
-                // aca va a ir todo lo relacionado al local storage
-                // llamar a local storage:
-                const localStorageItem = localStorage.getItem(itemName);
-                // aca hay 2 casos: que el usuario no tenga o si tenga todos guardados
-                let parsedItem;
-                // verificamos si no hay nada en localStorage:
-                if(!localStorageItem){
-                    localStorage.setItem(itemName, JSON.stringify(initialValue));
-                    parsedItem = initialValue;
-                }else{parsedItem = JSON.parse(localStorageItem)};
-                setItem(parsedItem);
-                setLoading(false);
-                setSynchronizedItem(true);
-            } catch (error) {
-                setError(error);
-            }
-        }, 1000)
-    }, [synchronizedItem]);
-    // ahora bien, vemos que si yo hago cambios en la app y recargo la pagina, esos cambios se deshacen, para evitar esto, debo de comunicar mi aplicacion con el local storage, para eso:
-    const saveItem = (newItem) => {
+    // Action creators
+    const onError = (error)=>dispatch({ type: actionTypes.error, payload: error});
+    const onSuccess = (parsedItem)=>dispatch({ type: actionTypes.success, payload: parsedItem});
+    const onSave = (newItem)=>dispatch({ type: actionTypes.save, payload: newItem});
+    const onSincronize = ()=>dispatch({ type: actionTypes.synchronize });
+
+    React.useEffect(()=>{
+        setTimeout( ()=>{
         try {
-            const stringyfiedItem = JSON.stringify(newItem);
-            localStorage.setItem(itemName, stringyfiedItem);
-            setItem(newItem);
-        } catch (error) {
-            setError(error);
-        }
-    };
+            const localStorageItem = localStorage.getItem(itemName);
+            let parsedItem;
 
-    // cuando haya un cambio de storage que pueda volver al estado de carga y tbn que se "dispare" el hecho de que hay que sincronizar la informacion de las 2 o mas pestañas en las que el usuario tiene abierta la app
-    const synchronizeItem = () => {
-        setLoading(true);
-        setSynchronizedItem(false);
+            if(!localStorageItem) {
+            localStorage.setItem(itemName,JSON.stringify(initialValue));
+            parsedItem = initialValue;
+            } else {
+            parsedItem = JSON.parse(localStorageItem);
+            }
+            onSuccess(parsedItem);
+        } catch (error) {
+            onError(error);
+        }
+        },1500);
+    },[synchronizedItem])
+
+    const saveItem = (newItem) =>{
+        try {
+            const stringifiedItem = JSON.stringify(newItem);
+            localStorage.setItem(itemName,stringifiedItem);
+            onSave(newItem);
+        } catch (error) {
+            onError(error);
+        }
+    }
+
+    const synchronizeItem = () =>{
+        onSincronize();
+    }
+
+    return {
+        item, 
+        saveItem, 
+        loading,
+        error,
+        synchronizeItem,
     };
-    
-    return {item, saveItem, loading, error, synchronizeItem};
-};
+}
+
+const initialState = ({ initialValue })=>({
+    synchronizedItem: true,
+    loading: true,
+    error: false,
+    item :initialValue,
+});
+
+const actionTypes = {
+    error: 'ERROR',
+    success: 'SUCCESS',
+    save: 'SAVE',
+    synchronize: 'SYNCHRONIZE',
+}
+
+const reducerObject = (state, payload) =>({
+    [actionTypes.error]: {
+        ...state,
+        error: true,
+    },
+    [actionTypes.success]:{
+        ...state,
+        error:false,
+        synchronizedItem: true,
+        loading: false,
+        item: payload,
+    },
+    [actionTypes.save]:{
+        ...state,
+        item:payload
+    },
+    [actionTypes.synchronize]:{
+        ...state,
+        synchronizedItem: false,
+        loading: true,
+    },
+});
+
+const reducer = (state, action) =>{
+    return reducerObject(state, action.payload)[action.type] || state;
+}
 
 export { useLocalStorage }
