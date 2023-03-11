@@ -1,0 +1,80 @@
+.submitForm {
+    width: 100%;
+    max-width: 300px;
+    background: rgb(0, 0, 0);
+    padding: 33px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 4;
+    box-shadow: 0 0 70px rgb(4, 0, 255), 0 0 50px 0 darkcyan;
+    border-radius: 12px;
+    border: 2px ridge darkblue
+}
+
+.submitFormLabel {
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+    font-family: sans-serif;
+    text-decoration: underline white;
+    text-shadow: 0 0 10px #0051ff;
+}
+
+.submitFormTextarea {
+    background-color: #F9FBFC;
+    border: 2px solid blue;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgb(4, 0, 255), 0 0 20px 0 darkcyan;
+    color: #1E1E1F;
+    font-size: 20px;
+    text-align: center;
+    padding: 12px;
+    height: 96px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.submitFormTextarea::placeholder {
+    color: #A5A5A5;
+    font-family: 'Montserrat';
+    font-weight: 400;
+}
+
+.submitFormTextarea:focus {
+    outline-color: #61DAFA;
+}
+
+.buttonContainer{
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.formButton{
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    color: white;
+    font-weight: 400;
+    width: 96px;
+    height: 40px;
+    border-radius: 4px;
+    font-family: sans-serif;
+}
+
+.addButton{
+    border: 1px ridge green;
+    box-shadow: 0 0 30px rgb(6, 201, 22);
+    background-color: rgb(0, 233, 19);
+}
+
+.cancelButton{
+    border: 1px ridge rgba(218, 21, 21, 0.836);
+    box-shadow: 0 0 30px rgb(255, 0, 0);
+    background-color: rgba(218, 21, 21, 0.836);
+}

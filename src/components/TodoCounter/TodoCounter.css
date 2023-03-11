@@ -1,0 +1,12 @@
+.todoCounter{
+    text-align: center;
+    font-size: 2rem;
+    text-shadow: 0 0 5px #0000FF;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: white;
+}
+
+.todoCounter--loading{
+    opacity: 50%;
+}
