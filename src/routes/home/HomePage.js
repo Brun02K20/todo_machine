@@ -7,7 +7,7 @@ import { TodoList } from '../../ui/TodoList/TodoList.js';
 import { TodoItem } from '../../ui/TodoItem/TodoItem.js';
 import { CreateTodoButton } from '../../ui/CreateTodoButton/CreateTodoButton.js';
 import { Modal } from "../../ui/Modal/modal.js";
-import { TodoForm } from "../../ui/TodoForm/todoForm.js";
+
 import { TodoHeader } from "../../ui/TodoHeader/TodoHeader.js";
 import { SearchResult } from '../../ui/SearchResult/SearchResult.js';
 import { ChangeAlert } from '../../ui/ChangeAlert/ChangeAlert.js';
@@ -16,25 +16,26 @@ import { ChangeAlert } from '../../ui/ChangeAlert/ChangeAlert.js';
 import { TodosError } from "../../ui/TodosError/todosError.js";
 import { TodosLoading } from "../../ui/TodosLoading/todosLoading.js";
 import { EmptyTodos } from "../../ui/EmptyTodos/emptyTodos.js";
+import { useNavigate } from 'react-router-dom';
 
 
 
 function HomePage() {
+    const navigate = useNavigate()
     const {
         error, 
         loading, 
         searchedTodos, 
         toggleCompleteTodo, 
         deleteTodo, 
-        openModal, 
-        setOpenModal,
+        // openModal, 
+        // setOpenModal,
         totalTodos, 
         completedTodos,
         searchValue, 
         setSearchValue,
-        addTodo,
+        // addTodo,
         synchronizedTodos,
-        editTodo
     } = useTodos();
     return(
         
@@ -79,7 +80,7 @@ function HomePage() {
                         completed={todo.completed}
                         onComplete={() => toggleCompleteTodo(todo.id)}
                         onDelete={() => deleteTodo(todo.id)}
-                        onEdit={editTodo}
+                        onEdit={() => navigate("/edit/" + todo.id)}
                     />
                 )}
             </TodoList>
@@ -100,14 +101,15 @@ function HomePage() {
                 }
             </TodoList> */}
 
-            {!!openModal && (
+            {/* {!!openModal && (
                 <Modal>
-                <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}/>
+                    <TodoForm addTodo={addTodo} setOpenModal={setOpenModal}/>
                 </Modal>
-            )}    
+            )}     */}
 
             < CreateTodoButton 
-                setOpenModal={setOpenModal}
+                onClick={() => navigate("/new")}
+                // setOpenModal={setOpenModal}
             />
 
             <ChangeAlert synchronize={synchronizedTodos} />

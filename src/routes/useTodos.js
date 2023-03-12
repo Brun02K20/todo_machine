@@ -5,6 +5,7 @@ import { useLocalStorage } from "./useLocalStorage";
 // React.createContext nos devuelve un objeto de dos componentes, Provider, y Consumer. El provider se usa para envolver toda la aplicacion (en el App.js). el consumer se usa en todas partes siempre que necesitemos info de ese estado compartido en cualquiera de nuestros componentes
 
 function useTodos(){
+    
     const {
         item: todos, 
         saveItem: saveTodos, 
@@ -63,10 +64,6 @@ function useTodos(){
         saveTodos(newTodos);
     };
 
-    const editTodo = () => {
-        console.log("Boton de editar")
-    }
-
     const addTodo = (textoDelTodo) => {
         if (!textoDelTodo.trim()) {
             alert("El nombre está vacío, escribe algo");
@@ -97,7 +94,6 @@ function useTodos(){
         setOpenModal,
         addTodo,
         synchronizedTodos,
-        editTodo
     };
 };
 
