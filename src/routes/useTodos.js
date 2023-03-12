@@ -11,7 +11,7 @@ function useTodos(){
         loading, 
         error, 
         synchronizeItem: synchronizedTodos
-    } = useLocalStorage("TODOS_V1", []);
+    } = useLocalStorage("TODOS_V2", []); // en un localStorage hay que enviar 2 cosas por defecto: el nombre de lo que vamos a guardar, y el segundo es el valor por defecto a enviar
 
     // el .filter te crea un nuevo array compuesto por los elementos del array anterior que cumplen con la condicion puesta en el filtro
     const completedTodos = todos.filter(todo => todo.completed).length;
@@ -44,9 +44,9 @@ function useTodos(){
     };
 
     // metodo para marcar TODOs como completados 
-    const toggleCompleteTodo = (textoDelTodo) => {
+    const toggleCompleteTodo = (id) => {
         // cambio un todo a completado.
-        const todoIndex = todos.findIndex(todo => todo.text === textoDelTodo);
+        const todoIndex = todos.findIndex(todo => todo.id === id);
 
         // lo que tenemos que hacer es enviarle una nueva lista con los nuevos valores, eliminando la lista anterior, para asi enviar los cambios a los TODOs
         const newTodos = [...todos];
@@ -55,9 +55,9 @@ function useTodos(){
     };
 
     // metodo para borrar un todo
-    const deleteTodo = (textoDelTodo) => {
+    const deleteTodo = (id) => {
         // cambio un todo a completado.
-        const todoIndex = todos.findIndex(todo => todo.text === textoDelTodo);
+        const todoIndex = todos.findIndex(todo => todo.id === id);
         const newTodos = [...todos];
         newTodos.splice(todoIndex, 1);
         saveTodos(newTodos);
@@ -72,11 +72,13 @@ function useTodos(){
             alert("El nombre está vacío, escribe algo");
             return;
         }
+        const id = newTodoId(); 
 
         const newTodos = [...todos];
         newTodos.push({
             text: textoDelTodo,
-            completed: false
+            completed: false,
+            id,
         })
         saveTodos(newTodos);
     }
@@ -98,6 +100,21 @@ function useTodos(){
         editTodo
     };
 };
+
+// generando ids: 
+function newTodoId() {
+    return Date.now()
+}
+
+// otra solucion posible para generar ids usando funciones generadoras de javascript
+// function* generateId() {
+//     let id = toDos.length
+//     while (true) {
+//         yield id++
+//     }
+// }
+
+// const newTodoId = generateId()
 
 
 export {useTodos};

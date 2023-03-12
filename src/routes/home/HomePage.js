@@ -74,11 +74,11 @@ function HomePage() {
             >
                 {todo => (
                     <TodoItem
-                        key={todo.text}
+                        key={todo.id}
                         text={todo.text}
                         completed={todo.completed}
-                        onComplete={() => toggleCompleteTodo(todo.text)}
-                        onDelete={() => deleteTodo(todo.text)}
+                        onComplete={() => toggleCompleteTodo(todo.id)}
+                        onDelete={() => deleteTodo(todo.id)}
                         onEdit={editTodo}
                     />
                 )}
