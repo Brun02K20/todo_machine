@@ -9,6 +9,7 @@ function TodoItem(propiedades){
         <li className="TodoItem">
             <span className={`Icon Icon-check ${propiedades.completed && 'Icon-check--active'}`} onClick={propiedades.onComplete}>√</span>
             <p className={`TodoItem-p ${propiedades.completed && 'TodoItem-p--complete'}`}>{propiedades.text}</p>
+            <span className="Icon Icon-edit" onClick={propiedades.onEdit}>Edit</span>
             <span className="Icon Icon-delete" onClick={propiedades.onDelete}>X</span>
         </li>
     );

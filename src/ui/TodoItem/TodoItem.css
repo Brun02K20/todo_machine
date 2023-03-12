@@ -54,3 +54,18 @@
 .Icon-delete:active{
     transform: translateY(4px);
 }
+
+.Icon-edit {
+    position: absolute;
+    top: -24px;
+    right: 48px;
+}
+
+.Icon-edit:hover {
+    color: purple;
+}
+
+.Icon-edit:active{
+    transform: translateY(4px);
+}
+

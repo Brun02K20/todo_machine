@@ -33,7 +33,8 @@ function HomePage() {
         searchValue, 
         setSearchValue,
         addTodo,
-        synchronizedTodos
+        synchronizedTodos,
+        editTodo
     } = useTodos();
     return(
         
@@ -78,6 +79,7 @@ function HomePage() {
                         completed={todo.completed}
                         onComplete={() => toggleCompleteTodo(todo.text)}
                         onDelete={() => deleteTodo(todo.text)}
+                        onEdit={editTodo}
                     />
                 )}
             </TodoList>

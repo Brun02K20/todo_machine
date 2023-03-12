@@ -63,6 +63,10 @@ function useTodos(){
         saveTodos(newTodos);
     };
 
+    const editTodo = () => {
+        console.log("Boton de editar")
+    }
+
     const addTodo = (textoDelTodo) => {
         if (!textoDelTodo.trim()) {
             alert("El nombre está vacío, escribe algo");
@@ -90,7 +94,8 @@ function useTodos(){
         openModal,
         setOpenModal,
         addTodo,
-        synchronizedTodos
+        synchronizedTodos,
+        editTodo
     };
 };
 
