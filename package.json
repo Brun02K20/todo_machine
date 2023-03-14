@@ -1,5 +1,5 @@
 {
-  "name": "curso_introduccion_react_platzi",
+  "name": "todo_machine",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -41,5 +41,5 @@
   "devDependencies": {
     "gh-pages": "^5.0.0"
   },
-  "homepage": "https://Brun02K20.github.io/CursoIntroduccionReactPlatzi"
+  "homepage": "https://Brun02K20.github.io/todo_machine"
 }
