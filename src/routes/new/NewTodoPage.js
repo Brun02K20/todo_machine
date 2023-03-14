@@ -4,12 +4,14 @@ import { useTodos } from "../useTodos.js";
 
 function NewTodoPage () {
     const {addTodo} = useTodos();
+    const {loading} = useTodos();
 
     return (
         <TodoForm 
             label="Write your new Todo"
             submitText="Add"
             submitEvent={(text) => addTodo(text)}
+            
         >
 
         </TodoForm>

@@ -82,7 +82,16 @@ function HomePage() {
                         completed={todo.completed}
                         onComplete={() => toggleCompleteTodo(todo.id)}
                         onDelete={() => deleteTodo(todo.id)}
-                        onEdit={() => navigate("/edit/" + todo.id)}
+                        onEdit={() => 
+                            navigate(
+                                "/edit/" + todo.id, 
+                                {
+                                    state: {
+                                        todo
+                                    }
+                                }
+                            )
+                        }
                     />
                 )}
             </TodoList>

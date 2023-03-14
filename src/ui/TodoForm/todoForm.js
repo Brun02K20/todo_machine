@@ -5,7 +5,7 @@ import "./todoForm.css"
 function TodoForm(props){
     const navigate = useNavigate();
     // crear un estado LOCAL (o sea, solamente propio de este componente), este estado escuchara los cambios que hagan los usuarios en el textarea y almacenara esa modificacion en una variable de estado
-    const [newTodoText, setNewTodoText] = React.useState("");
+    const [newTodoText, setNewTodoText] = React.useState(props.defaultTodoText || "");
 
     const onChange = (evento) => {
         setNewTodoText(evento.target.value);
