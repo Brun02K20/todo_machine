@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 // import './App.css';
 import { useTodos } from '../useTodos.js';
 import { TodoCounter } from '../../ui/TodoCounter/TodoCounter.js';
@@ -8,6 +9,7 @@ import { TodoItem } from '../../ui/TodoItem/TodoItem.js';
 import { CreateTodoButton } from '../../ui/CreateTodoButton/CreateTodoButton.js';
 import { Modal } from "../../ui/Modal/modal.js";
 
+
 import { TodoHeader } from "../../ui/TodoHeader/TodoHeader.js";
 import { SearchResult } from '../../ui/SearchResult/SearchResult.js';
 import { ChangeAlert } from '../../ui/ChangeAlert/ChangeAlert.js';
@@ -16,12 +18,12 @@ import { ChangeAlert } from '../../ui/ChangeAlert/ChangeAlert.js';
 import { TodosError } from "../../ui/TodosError/todosError.js";
 import { TodosLoading } from "../../ui/TodosLoading/todosLoading.js";
 import { EmptyTodos } from "../../ui/EmptyTodos/emptyTodos.js";
-import { useNavigate } from 'react-router-dom';
+
 
 
 
 function HomePage() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const {
         error, 
         loading, 

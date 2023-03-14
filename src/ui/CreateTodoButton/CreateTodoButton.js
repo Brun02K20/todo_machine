@@ -14,7 +14,7 @@ function CreateTodoButton(props){
     return (
         <button 
             className="createTodoButton" 
-            onClick={props.on}
+            onClick={props.onClick}
         >
             +
         </button>
