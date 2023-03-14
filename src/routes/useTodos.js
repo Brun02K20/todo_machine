@@ -21,9 +21,6 @@ function useTodos(){
     // Bien, la idea ahora es que el buscador funcione como un filtrador de TODOs, como hariamos eso?
     const [searchValue, setSearchValue] = React.useState("");
 
-    // creando estado para el modal, por defecto diremos que no esta abierto, es decir, arrancamos con un false
-    const [openModal, setOpenModal] = React.useState(false);
-
     // DUDA... PORQUE SE USA LET Y NO CONST EN ESTE CASO SI SE TRATA DE UN ARRAY? ADEMAS DE QUE LA CONSTANTE ESTA EN UN ALCANCE DE BLOCKSCOPE COMO POR ASI DECIR SUPERIOR AL IF
     let searchedTodos = [];
 
@@ -80,6 +77,13 @@ function useTodos(){
         saveTodos(newTodos);
     }
 
+    const editTodo = (id, newTodoText) => {
+        const todoIndex = todos.findIndex(todo => todo.id === id);
+        const newTodos = [...todos];
+        newTodos[todoIndex].text = newTodoText; 
+        saveTodos(newTodos);
+    }
+
     return {
         loading,
         error,
@@ -90,10 +94,9 @@ function useTodos(){
         searchedTodos,
         toggleCompleteTodo,
         deleteTodo,
-        openModal,
-        setOpenModal,
         addTodo,
         synchronizedTodos,
+        editTodo
     };
 };
 

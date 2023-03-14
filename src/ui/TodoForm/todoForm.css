@@ -28,6 +28,7 @@
     font-family: sans-serif;
     text-decoration: underline white;
     text-shadow: 0 0 10px #0051ff;
+    text-align: center;
 }
 
 .submitFormTextarea {
