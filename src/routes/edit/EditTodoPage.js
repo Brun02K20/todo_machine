@@ -26,7 +26,7 @@ function EditTodoPage () {
             defaultTodoText={todoText}
             submitText="Edit"
             submitEvent={(newTodoText) => editTodo(id, newTodoText)}
-            
+            loading={loading}
         >
 
         </TodoForm>

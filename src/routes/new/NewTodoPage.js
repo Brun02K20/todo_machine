@@ -11,7 +11,7 @@ function NewTodoPage () {
             label="Write your new Todo"
             submitText="Add"
             submitEvent={(text) => addTodo(text)}
-            
+            loading={loading}
         >
 
         </TodoForm>

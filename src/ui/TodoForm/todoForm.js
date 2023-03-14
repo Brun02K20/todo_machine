@@ -30,11 +30,12 @@ function TodoForm(props){
                     onChange={onChange}
                     placeholder="Write your TO-DO..."
                     className="submitFormTextarea"
+                    disabled={props.loading}
                     required            
                 />
                 <div className="buttonContainer">
                     <button type="button" onClick={onCancel} className="formButton cancelButton">Cancel</button>
-                    <button type="submit" className="formButton addButton">{props.submitText}</button>
+                    <button type="submit" className="formButton addButton" disabled={props.loading}>{props.submitText}</button>
                 </div>
             </form>
         </div>
